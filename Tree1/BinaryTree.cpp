@@ -3,6 +3,10 @@
 
 BinaryTree::BinaryTree() { root = NULL;}
 
+BinaryTree::BinaryTree(int value) {
+    root = new Nodo(NULL, value, NULL);
+}
+
 BinaryTree::BinaryTree(Nodo* r) { root = r; }
 
 BinaryTree::~BinaryTree(){}
@@ -31,7 +35,35 @@ Nodo* BinaryTree::add_child(Nodo* ptr_node, int value) {
     }
 }
 
+Nodo* BinaryTree::add_child(int value) {
+    if (root->data == value)
+    {
+        return root;
+    }
+    // left subtree
+    if (value < root->data) {
+        if (root->left) {  // continue
+            root->left = add_child(root->left, value);
+        }
+        else { // create node
+            root->left = new Nodo(value);
+        }
+    }
+    else { // right subtree
+        if (root->right) {  // continue
+            root->right = add_child(root->right, value);
+        }
+        else { // create node
+            root->right = new Nodo(value);
+        }
+    }
+}
+
 Nodo* BinaryTree::new_tree
     (Nodo* left_branch, int value, Nodo* right_branch) {
     return new Nodo(left_branch, value, right_branch);
+}
+
+Nodo* BinaryTree::new_tree(int value) {
+    return new Nodo(value);
 }
