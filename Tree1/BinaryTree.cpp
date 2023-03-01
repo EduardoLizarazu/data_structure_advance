@@ -4,6 +4,7 @@
 BinaryTree::BinaryTree() { root = NULL;}
 
 BinaryTree::BinaryTree(int value) {
+    ++counter_node;
     root = new Nodo(NULL, value, NULL);
 }
 
@@ -22,6 +23,7 @@ Nodo* BinaryTree::add_child(Nodo* ptr_node, int value) {
             ptr_node->left = add_child(ptr_node->left, value);
         }
         else { // create node
+            ++counter_node;
             ptr_node->left = new Nodo(value);
         }
     }
@@ -30,6 +32,7 @@ Nodo* BinaryTree::add_child(Nodo* ptr_node, int value) {
             ptr_node->right = add_child(ptr_node->right, value);
         }
         else { // create node
+            ++counter_node;
             ptr_node->right = new Nodo(value);
         }
     }
@@ -61,9 +64,17 @@ Nodo* BinaryTree::add_child(int value) {
 
 Nodo* BinaryTree::new_tree
     (Nodo* left_branch, int value, Nodo* right_branch) {
+    counter_node = 0;
     return new Nodo(left_branch, value, right_branch);
 }
 
 Nodo* BinaryTree::new_tree(int value) {
     return new Nodo(value);
+}
+
+void BinaryTree::in_order(Nodo* ptr_node) {
+    if (!ptr_node) { return; }
+    BinaryTree::in_order(ptr_node->left);
+    std::cout << ptr_node->data << "\n";
+    BinaryTree::in_order(ptr_node->right);
 }

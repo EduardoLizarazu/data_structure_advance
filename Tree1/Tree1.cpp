@@ -15,6 +15,7 @@ int main()
     tree_root.add_child(root, 4);
     tree_root.add_child(root, 18);
     tree_root.add_child(root, 6);
+    tree_root.in_order(root);
 
     return 0;
 }
